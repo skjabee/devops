@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Form</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to right, #74ebd5, #acb6e5);
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      animation: fadeIn 1.5s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .contact-form {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+      width: 90%;
+      max-width: 450px;
+      transition: all 0.3s ease;
+    }
+
+    .contact-form h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+      outline: none;
+      transition: border 0.3s ease;
+    }
+
+    input:focus, textarea:focus {
+      border-color: #66afe9;
+    }
+
+    .error {
+      border-color: red;
+    }
+
+    .btn-submit {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .btn-submit:hover {
+      background: #45a049;
+    }
+
+    .success-message {
+      text-align: center;
+      color: green;
+      margin-top: 15px;
+      display: none;
+    }
+
+    @media (max-width: 500px) {
+      .contact-form {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="contact-form">
+    <h2>Contact Us</h2>
+    <form id="form">
+      <div class="form-group">
+        <label for="name">Name *</label>
+        <input type="text" id="name" required />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input type="email" id="email" required />
+      </div>
+
+      <div class="form-group">
+        <label for="message">Message *</label>
+        <textarea id="message" rows="4" required></textarea>
+      </div>
+
+      <button type="submit" class="btn-submit">Send Message</button>
+      <p class="success-message" id="success">Thanks! We'll get back to you soon.</p>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('form');
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const messageInput = document.getElementById('message');
+    const successMessage = document.getElementById('success');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // Reset styles
+      [nameInput, emailInput, messageInput].forEach(input => {
+        input.classList.remove('error');
+      });
+
+      // Simple validation
+      let isValid = true;
+
+      if (nameInput.value.trim() === '') {
+        nameInput.classList.add('error');
+        isValid = false;
+      }
+
+      if (!emailInput.value.includes('@') || emailInput.value.trim() === '') {
+        emailInput.classList.add('error');
+        isValid = false;
+      }
+
+      if (messageInput.value.trim().length < 10) {
+        messageInput.classList.add('error');
+        isValid = false;
+      }
+
+      if (isValid) {
+        // Simulate form send
+        successMessage.style.display = 'block';
+        form.reset();
+
+        setTimeout(() => {
+          successMessage.style.display = 'none';
+        }, 3000);
+      }
+    });
+  </script>
+
+</body>
+</html>
