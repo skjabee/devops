@@ -1,33 +1,25 @@
-def add(a, b):
-    return a + b
+import sys
 
-def subtract(a, b):
-    return a - b
-
-def multiply(a, b):
-    return a * b
-
-def divide(a, b):
-    return a / b if b != 0 else "Error: Division by zero"
+def add(x, y): return x + y
+def subtract(x, y): return x - y
+def multiply(x, y): return x * y
+def divide(x, y): return x / y
 
 if __name__ == "__main__":
-    print("Simple Calculator")
-    print("1. Add")
-    print("2. Subtract")
-    print("3. Multiply")
-    print("4. Divide")
+    if len(sys.argv) != 4:
+        print("Usage: python calculator.py <choice: add|sub|mul|div> <num1> <num2>")
+        sys.exit(1)
 
-    choice = input("Enter choice (1/2/3/4): ")
-    num1 = float(input("Enter first number: "))
-    num2 = float(input("Enter second number: "))
+    choice, num1, num2 = sys.argv[1], float(sys.argv[2]), float(sys.argv[3])
 
-    if choice == "1":
-        print("Result:", add(num1, num2))
-    elif choice == "2":
-        print("Result:", subtract(num1, num2))
-    elif choice == "3":
-        print("Result:", multiply(num1, num2))
-    elif choice == "4":
-        print("Result:", divide(num1, num2))
+    if choice == "add":
+        print(add(num1, num2))
+    elif choice == "sub":
+        print(subtract(num1, num2))
+    elif choice == "mul":
+        print(multiply(num1, num2))
+    elif choice == "div":
+        print(divide(num1, num2))
     else:
         print("Invalid choice")
+
